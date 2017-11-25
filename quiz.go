@@ -28,6 +28,7 @@ func main() {
 		}
 		if err != nil {
 			log.Fatal(err)
+			continue
 		}
 
 		problem := record[0]
@@ -38,10 +39,10 @@ func main() {
 		fmt.Scanln(&response)
 
 		if response == solution {
-			fmt.Print("Correct!\n")
+			fmt.Println("Correct!")
 			numCorrect++
 		} else {
-			fmt.Print("Incorrect :(\n")
+			fmt.Println("Incorrect :(")
 			numIncorrect++
 		}
 	}
