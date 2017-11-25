@@ -62,5 +62,5 @@ func main() {
 		fmt.Println("Congrats you finished!")
 	}
 
-	fmt.Printf("Number correct: %v, number incorrect: %v\n", numCorrect, numIncorrect)
+	fmt.Printf("Number correct: %v, number incorrect: %v, total: %v\n", numCorrect, numIncorrect, numCorrect+numIncorrect)
 }
