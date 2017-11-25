@@ -27,7 +27,7 @@ func main() {
 
 	r := csv.NewReader(bufio.NewReader(file))
 
-	go func() {
+	go func(r *csv.Reader, correct, incorrect *int) {
 		for {
 			record, err := r.Read()
 			if err == io.EOF {
@@ -46,26 +46,22 @@ func main() {
 
 			if response == solution {
 				fmt.Println("Correct!")
-				numCorrect++
+				*correct++
 			} else {
 				fmt.Println("Incorrect :(")
-				numIncorrect++
+				*incorrect++
 			}
 		}
-	}()
+	}(r, &numCorrect, &numIncorrect)
 
 	timeLimit := time.After(30 * time.Second)
 
-	for {
-		select {
-		case <-timeLimit:
-			fmt.Println("TIMES UP YER DONE")
-			printResults(numCorrect, numIncorrect)
-			os.Exit(0)
-		case <-finished:
-			fmt.Println("Congrats you finished!")
-			printResults(numCorrect, numIncorrect)
-			os.Exit(0)
-		}
+	select {
+	case <-timeLimit:
+		fmt.Println("TIMES UP YER DONE")
+		printResults(numCorrect, numIncorrect)
+	case <-finished:
+		fmt.Println("Congrats you finished!")
+		printResults(numCorrect, numIncorrect)
 	}
 }
