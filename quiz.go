@@ -23,6 +23,9 @@ func main() {
 
 	r := csv.NewReader(bufio.NewReader(file))
 
+	fmt.Println("Press enter when you're ready!")
+	fmt.Scanln()
+
 	go func(r *csv.Reader, correct, incorrect *int) {
 		for {
 			record, err := r.Read()
