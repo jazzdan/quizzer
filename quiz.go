@@ -10,10 +10,6 @@ import (
 	"time"
 )
 
-func printResults(numCorrect int, numIncorrect int) {
-	fmt.Printf("Number correct: %v, number incorrect: %v\n", numCorrect, numIncorrect)
-}
-
 func main() {
 	finished := make(chan bool)
 	file, err := os.Open("./problems.csv")
@@ -59,9 +55,9 @@ func main() {
 	select {
 	case <-timeLimit:
 		fmt.Println("TIMES UP YER DONE")
-		printResults(numCorrect, numIncorrect)
 	case <-finished:
 		fmt.Println("Congrats you finished!")
-		printResults(numCorrect, numIncorrect)
 	}
+
+	fmt.Printf("Number correct: %v, number incorrect: %v\n", numCorrect, numIncorrect)
 }
