@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	finished := make(chan bool)
+	finished := make(chan struct{})
 	file, err := os.Open("./problems.csv")
 
 	if err != nil {
@@ -27,7 +27,7 @@ func main() {
 		for {
 			record, err := r.Read()
 			if err == io.EOF {
-				finished <- true
+				finished <- struct{}{}
 			}
 			if err != nil {
 				log.Fatal(err)
